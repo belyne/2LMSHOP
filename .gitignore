@@ -3,3 +3,7 @@ venv/
 
 # Environment variables file
 .env
+
+# No so useful files/folders
+.vsvode/
+.idea/
