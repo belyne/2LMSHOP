@@ -5,5 +5,5 @@ venv/
 .env
 
 # No so useful files/folders
-.vsvode/
+.vscode/
 .idea/
