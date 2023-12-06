@@ -13,3 +13,12 @@ if (close) {
     nav.classList.remove('active');
   })
 }
+
+var MainImg = document.getElementById("MainImg");
+var smallimg = document.getElementsByClassName("small-img");
+
+for (var i = 0; i < smallimg.length; i++) {
+  smallimg[i].onclick = function() {
+    MainImg.src = this.src;
+  };
+}
