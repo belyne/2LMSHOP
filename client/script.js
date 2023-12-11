@@ -22,3 +22,15 @@ for (var i = 0; i < smallimg.length; i++) {
     MainImg.src = this.src;
   };
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var checkoutButton = document.getElementById('checkout-button');
+
+  if (checkoutButton) {
+      checkoutButton.addEventListener('click', function () {
+          // Redirect to the checkout page
+          window.location.href = 'checkout.html';
+      });
+  }
+});

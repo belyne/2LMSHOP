@@ -654,6 +654,110 @@ footer a {
   color: #aea38e;
 }
 
+/* SignIn/SignUp Page */
+
+#signin-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  flex-wrap: wrap;
+  margin-bottom: 70px;
+}
+
+#signin, #signup {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #222;
+  margin: 20px;
+}
+
+#signin h2, #signup h2 {
+  padding-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #000;
+  color: #ffff;
+  
+}
+
+#sign p {
+  text-align: center;
+}
+
+#sign p a {
+  color: #4665b4;
+  font-weight: 600;
+}
+
+/* Signout Page */
+
+#signout {
+  margin-left: 20px;
+}
+
+/* CheckOut Page */
+
+#page-header.checkout-header {
+  background-image: url("img/banner/b11.jpg");
+}
+
+#checkout-form {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+
+
+
 /* Cart Page */
 
 #page-header.cart-header {

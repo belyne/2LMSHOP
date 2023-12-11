@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up - 2LMSHOP</title>
+    <script src="script.js" defer></script>
+    <script src="https://kit.fontawesome.com/274c052308.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <section id="header">
+      <a href="./home.html"><img src="img/logo.png" class="logo"></a>
+
+      <div>
+        <ul id="navbar">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a class="active" href="signin.html">SignIn</a></li>
+          <li><a href="signout.html">SignOut</a></li>
+          <li><a href="checkout.html">CheckOut</a></li>
+          <li id="ig-bag"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+          <a href="#" id="close"><i class="fa-regular fa-circle-xmark"></i></a>
+        </ul>
+      </div>
+  
+      <div id="mobile">
+        <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+        <i  id="bar" class="fa-solid fa-bars"></i>
+      </div>
+    </section>
+
+    <section id="signin-signup" class="section-p1">
+        <div id="signin">
+            <form action="signin_process.php" method="post">
+                <h2>Sign In</h2>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <input type="checkbox" onclick="showPassword()"> Show Password
+
+                <button type="submit" class="normal">Sign In</button>
+            </form>
+            </div>
+
+    </section>
+
+    <section id="sign">
+      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+    </section>
+
+    <footer class="section-p1">
+      <div class="follow">
+          <h4>Follow us</h4>
+          <div class="icon">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-pinterest-p"></i>
+            <i class="fa-brands fa-youtube"></i>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="#">View cart</a>
+        <a href="#">My wishlist</a>
+        <a href="#">Track My order</a>
+        <a href="#">Help</a>
+      </div>
+  
+    </footer>
+
+</body>
+
+</html>
+
