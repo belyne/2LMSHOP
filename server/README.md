@@ -18,16 +18,14 @@ This will start the server on http://localhost:8000/. You can then use a tool li
 The Ecommerce API includes the following endpoints:  
 ### Authentication
 ```
-    POST /auth/register1/: Register a new user with basic information
-    POST /auth/register2/: Register a new user with admin privileges
-    POST /auth/login/: Authenticate a user and get an access token
-    POST /auth/logout/: Log out a user and revoke their access token
+    POST /user/register1/: Register a new user with basic information
+    POST /user/register2/: Register a new user with admin privileges
+    POST /user/login/: Authenticate a user and get an access token
+    POST /user/logout/: Log out a user and revoke their access token
 ```
 ### Users  
 ```
-    GET /auth/: Get a list of all users (requires admin privileges)
-    PUT /auth/:id/: Update user details (requires admin privileges)
-    DELETE /auth/:id/: Delete a user (requires admin privileges)  
+    GET /users/: Get a list of all users (requires admin privileges)
 ``` 
 ### Products
 ```
