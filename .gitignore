@@ -7,3 +7,4 @@ venv/
 # No so useful files/folders
 .vscode/
 .idea/
+*__pycache__/
