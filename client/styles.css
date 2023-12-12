@@ -71,8 +71,7 @@ button.normal {
 }
 
 .logo {
-  width: 10%;
-  height: 10%;
+  width: 20%;
 }
 
 /* Header start */
@@ -742,6 +741,11 @@ form {
   margin: 0 auto;
 }
 
+#checkout-form h2 {
+  padding-bottom: 30px;
+  padding-top: 10px;
+}
+
 label {
   display: block;
   margin-bottom: 8px;
@@ -939,7 +943,7 @@ input, textarea {
   }
 
   #hero {
-    height: 70vh;
+    height: 60vh;
     padding: 0 80px;
     background-position: top 30% right 30%;
 
