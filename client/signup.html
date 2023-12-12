@@ -46,7 +46,7 @@
 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
-                <input type="checkbox" onclick="showPassword()"> Show Password
+                <input type="checkbox" id="form-checkbox"  onclick=showPassword()> Show Password
 
                 <button type="submit" class="normal">Sign Up</button>
             </form>
@@ -77,6 +77,15 @@
   
     </footer>
 
+    <script>
+
+      function showPassword () {
+        let password = document.getElementById("password");
+        let checkBox = document.getElementById("form-checkbox");
+        checkBox.checked ? password.type = "text" : password.type = "password"
+      }
+      
+    </script>
 </body>
 
 </html>
