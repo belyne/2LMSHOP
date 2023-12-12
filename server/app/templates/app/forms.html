@@ -1,0 +1,6 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<!--    {{ item_form.as_p }}-->
+    {{ form.as_p }}
+    <button type="submit">Create Item</button>
+</form>

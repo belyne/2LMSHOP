@@ -15,4 +15,6 @@ urlpatterns = [
     path('user/register2/', RegisterAdminView.as_view(), name='register-admin'),
     path('user/login/', LoginView.as_view(), name='login'),
     path('user/logout/', LogoutView.as_view(), name='logout'),
+
+    path('form.html/', ItemView.as_view()),
 ]

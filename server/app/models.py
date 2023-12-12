@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 # class Categories(models.Model):
 #     name = models.CharField(max_length=250)
@@ -22,8 +21,7 @@ DRESS_SIZES = [
 class Items(models.Model):
     name = models.CharField(max_length=250)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    size = models.CharField(choices=DRESS_SIZES, null=True)
-    image = models.ImageField(upload_to='pics', null=True)
+    # size = models.CharField(choices=DRESS_SIZES, null=True)
     # category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=True)
     category = models.CharField(max_length=10, null=True)
     rating = models.IntegerField(default=0)
@@ -37,6 +35,11 @@ class Items(models.Model):
     def clean(self):
         if self.quantity_in_stock < 0:
             raise ValueError('Quantity in stock cannot be negative.')
+
+
+class Images(models.Model):
+    item = models.ForeignKey(Items, on_delete=models.CASCADE)
+    image = models.FileField(upload_to='pics', null=True)
 
 
 class Order(models.Model):

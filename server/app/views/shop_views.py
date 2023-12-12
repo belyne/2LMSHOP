@@ -1,12 +1,16 @@
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.core.mail import send_mail
+from django.views.generic.edit import CreateView
 from app.models import *
 from django.conf import settings
+
+from app.forms import ItemForm
+from app.models import Items
 
 
 # Create your views here.
@@ -166,3 +170,7 @@ class CheckoutView(APIView):
             return Response({'message': 'Payment failed.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ItemView(CreateView):
+    model = Items
+    form_class = ItemForm
+    template_name = 'app/forms.html'
