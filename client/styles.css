@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: fit-content;
   font-family: 'spartan', sans-serif;
 }
 
@@ -871,6 +872,13 @@ input, textarea {
   font-size: 15px;
 }
 
+.shop-save-button {
+  position: absolute;
+  right: 200px;
+  width: 10vw;
+  height: 40px;
+  font-size: 20px !important;
+}
 
 /* Media */
 
@@ -1059,7 +1067,7 @@ input, textarea {
 
   #prodetails .single-pro-image {
     width: 100%;
-    margin-right: 0px;
+    margin-right: 0;
   }
 
   #prodetails .single-pro-details {
@@ -1079,7 +1087,7 @@ input, textarea {
 
   #blog .blog-img {
     width: 100%;
-    margin-right: 0px;
+    margin-right: 0;
     margin-bottom: 30px;
   }
 
