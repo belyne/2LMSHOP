@@ -5,44 +5,46 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.core.mail import send_mail
+from django.core.files.storage import default_storage
 from django.views.generic.edit import CreateView
 from app.models import *
 from django.conf import settings
 
 from app.forms import ItemForm
-from app.models import Items
+from app.models import Items, Images
 
 
 # Create your views here.
 
 class ProductView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAdminUser, IsAuthenticated]
-
     def get(self, request):
         products = Items.objects.all()
         list_of_products = dict()
         for item in products:
+            item_images = Images.objects.filter(item=item)
+            image_urls = [default_storage.url(image.image) for image in item_images]
             list_of_products[item.id] = {
                 "name": item.name,
                 "price": item.price,
-                "quantity_in_stock": item.quantity_in_stock
+                "rating": item.rating,
+                "category": item.category,
+                "image-urls": image_urls
             }
         return Response(list_of_products)
 
-    def post(self, request):
-        name = request.data.get('name')
-        price = request.data.get('price')
-        # category=  request.data.get('category')
-        quantity_in_stock = request.data.get('quantity_in_stock')
-        Items.objects.create(
-            name=name,
-            price=price,
-            quantity_in_stock=quantity_in_stock
-        )
-        if Items.objects.get(name=name):
-            return Response({'success': 'Product {} added w/o issue'.format(name)})
-        return Response({'error': "Couldn't add Product {}".format(name)})
+    # def post(self, request):
+    #     name = request.data.get('name')
+    #     price = request.data.get('price')
+    #     category=  request.data.get('category')
+    #     quantity_in_stock = request.data.get('quantity_in_stock')
+    #     Items.objects.create(
+    #         name=name,
+    #         price=price,
+    #         quantity_in_stock=quantity_in_stock
+    #     )
+    #     if Items.objects.get(name=name):
+    #         return Response({'success': 'Product {} added w/o issue'.format(name)})
+    #     return Response({'error': "Couldn't add Product {}".format(name)})
 
     def put(self, request):
         name = request.data.get('name')
