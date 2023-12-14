@@ -3,6 +3,7 @@ $(document).ready(function () {
         const username = $('input#username').val()
         const password = $('input#password').val()
         const email = $('input#email').val()
+
         $.ajax({
             type: 'POST',
             url: 'http://127.0.0.1:8000/user/register1/',
@@ -12,9 +13,8 @@ $(document).ready(function () {
                 'email': email
             },
             success: (res) => {
-                const token = res.token;
-                console.log(token);
-                localStorage.setItem('authToken', token);
+                console.log(res.token);
+                // authToken = token;
             }
         })
     })
