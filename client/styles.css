@@ -324,7 +324,7 @@ button.normal {
 }
 
 button.white {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   padding: 11px 18px;
   color: #ffff;
@@ -436,6 +436,7 @@ button.white {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-right: 40px;
+  height: 3.125rem;
 }
 
 footer {
