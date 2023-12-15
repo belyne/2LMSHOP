@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2LMSHOP</title>
+    <script src="./assets/jquery-3.7.1.min.js"></script>
     <script src="script.js" defer></script>
+    <script src="assets/sproduct.js" defer></script>
     <script src="https://kit.fontawesome.com/274c052308.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -19,7 +21,7 @@
         <li><a href="home.html">Home</a></li>
           <li><a href="shop.html">Shop</a></li>
           <li><a href="blog.html">Blog</a></li>
-          <li><a class="active" href="signin.html">SignIn</a></li>
+          <li><a href="signin.html">SignIn</a></li>
           <li><a href="signout.html">SignOut</a></li>
           <li id="ig-bag"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
           <a href="#" id="close"><i class="fa-regular fa-circle-xmark"></i></a>
@@ -34,24 +36,17 @@
 
   <section id="prodetails" class="section-p1">
     <div class="single-pro-image">
-      <img src="img/products/f2.jpg" width="100%" id="MainImg"  alt="">
-
+      <div class="large-image">
+        <img src="img/products/f2.jpg" width="100%" id="MainImg"  alt="">
+      </div>
       <div class="small-img-group">
-        <div class="small-img-col">
-          <img src="img/products/f1.jpg" width="100%" class="small-img" alt="">
-        </div>
-
-        <div class="small-img-col">
-          <img src="img/products/f4.jpg" width="100%" class="small-img" alt="">
-        </div>
-
       </div>
     </div>
 
     <div class="single-pro-details">
-      <h2>Home / Shirt</h2>
-      <h4>Men's Fashion Shirst</h4>
-      <h6>$20</h6>
+      <h2></h2>
+      <h4 class="product-name"></h4>
+      <h6 class="product-price"></h6>
       <select>
         <option>Select size</option>
         <option>Small</option>

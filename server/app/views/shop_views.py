@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework.exceptions import NotFound
 from django.core.mail import send_mail
 from django.core.files.storage import default_storage
 from django.views.generic.edit import CreateView
@@ -15,8 +16,19 @@ from app.models import Items, Images
 
 
 # Create your views here.
+class ProductDetailView(APIView):
+    def get(self, request, pk):
+        item = get_object_or_404(Items, id=pk)
+        item_images = Images.objects.filter(item=item)
+        return Response({
+            'name': item.name,
+            'price': item.price,
+            'category': item.category,
+            'image_urls': [default_storage.url(image.image) for image in item_images]
+        })
 
-class ProductView(APIView):
+
+class ProductListView(APIView):
     def get(self, request):
         products = Items.objects.all()
         list_of_products = dict()

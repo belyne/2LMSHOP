@@ -17,7 +17,7 @@ $(document).ready(function () {
                     }
                     return rate;
                 }
-                $('.pro-container').append(`<div id="${prop}" class="pro"">
+                $('.pro-container').append(`<div id="${prop}" class="pro" onClick="window.location.href='sproduct.html?id=${prop}'"">
                     <img src=${imageSrc} alt="">
                     <div class="des">
                       <span>${itemCategory}</span>
