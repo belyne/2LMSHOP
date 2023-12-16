@@ -1,6 +1,5 @@
 $(document).ready(function () {
     const authToken = localStorage.getItem('authToken');
-    let cartSubTotal = 0;
     $.ajax({
         type: 'GET',
         url: 'http://localhost:8000/cart/',
@@ -15,29 +14,59 @@ $(document).ready(function () {
                 let itemPrice = value['price'];
                 let itemQuantity = value['quantity'];
                 let subTotalPrice = itemPrice * itemQuantity;
-                cartSubTotal += subTotalPrice
                 $('table.cart-table tbody').append(`
-                <tr>
+                <tr id='${prop}'>
                     <td><i class="fa-regular fa-circle-xmark cart-item-remove"></i></td>
                     <td><img src="${imageSrc}" alt=""></td>
                     <td>${itemName}</td>
-                    <td>$${itemPrice}</td>
-                    <td><input type="number" value="${itemQuantity}" min=1></td>
+                    <td class="item-price">$${itemPrice}</td>
+                    <td><input class="quantity-input" type="number" value="${itemQuantity}" min=1></td>
                     <td class="sub-total-price">$${subTotalPrice}</td>
                 </tr>
                 `)
             })
-            console.log(cartSubTotal)
+
+            $('.quantity-input').on('input', function () {
+                let row = $(this).closest('tr');
+                let qty = $(this).val()
+                let price = row.find('.item-price')
+                row.find('.sub-total-price').text(`$${qty * parseInt(price.text().slice(1))}`)
+            })
 
             const checkOut = () => {
+                let cartSubTotal = 0;
+                $('.sub-total-price').each(function (index, element) {
+                    console.log($(element).text())
+                    cartSubTotal += parseInt($(element).text().slice(1))
+                })
+                console.log(cartSubTotal)
                 $('#cart-subtotal-price').find("td:nth-child(2)").text(`$${cartSubTotal}`)
                 let totalPrice = cartSubTotal + parseInt($('#cart-shipping').find("td:nth-child(2)").text().slice(1))
                 $('#cart-total-price').find("td:nth-child(2)").text(`$${totalPrice}`)
+
             }
             checkOut();
-            // $('.shop-save-button').click(() => {
-            //     checkOut();
-            // })
+
+            $('.shop-save-button').click(() => {
+                $('table.cart-table tbody tr').each(function (index, element) {
+                    let item_id = $(element).attr('id');
+                    $.ajax({
+                        type: 'PUT',
+                        url: 'http://localhost:8000/cart/',
+                        headers: {
+                            'Authorization': `Token ${authToken}`
+                        },
+                        data: {
+                            'item_id': item_id,
+                            'quantity': parseInt($(element).find('.quantity-input').val())
+                        },
+                        success: function (res) {
+                            console.log(res);
+                        }
+                    })
+                })
+                checkOut();
+            })
         }
     })
 })

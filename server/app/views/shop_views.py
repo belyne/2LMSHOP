@@ -145,11 +145,10 @@ class CartView(APIView):
         return Response(list_of_cart_products)
     def put(self, request):
         order = Order.objects.get(users=request.user, ordered=False)
-        item_id = request.data.get('item_id')
-        order_item = get_object_or_404(OrderItem, order=order, item__id=item_id)
-        quantity = request.data.get('quantity', order_item.quantity)
-        # data = json.loads(request.body)
-        # quantity = data.get('quantity', order_item.quantity)
+        order_item_id = request.data.get('item_id')
+        order_item = OrderItem.objects.get(id=order_item_id)
+        # order_item = get_object_or_404(OrderItem, order=order, item__id=item_id)
+        quantity = int(request.data.get('quantity', order_item.quantity))
         if quantity < 0:
             return Response({'error': 'Quantity cannot be negative.'}, status=status.HTTP_400_BAD_REQUEST)
         order_item.quantity = quantity
@@ -178,10 +177,10 @@ class CheckoutView(APIView):
             i = OrderItem.objects.get(order=order, item=item)
             item.quantityInStock -= i.quantity
             item.save()
-        totalPrice = sum([order_item.getTotalPrice() for order_item in OrderItem.objects.filter(order=order)])
+        total_price = sum([order_item.getTotalPrice() for order_item in OrderItem.objects.filter(order=order)])
         # Charging the user for the order
         # (The payment processing code)
-        if totalPrice > 0:
+        if total_price > 0:
             order.ordered = True
             order.save()
             # Payment successful
@@ -190,7 +189,7 @@ class CheckoutView(APIView):
             message = f"Thank you for your purchase! Your order will be shipped to:\n{order.users.email}\n\nItems:\n"
             for order_item in OrderItem.objects.filter(order=order):
                 message += f"{order_item.quantity} x {order_item.item.name} - {order_item.getTotalPrice()}frs\n"
-            message += f"Total Price: {totalPrice}frs"
+            message += f"Total Price: {total_price}frs"
             send_mail(
                 subject=f"Purchase Confirmation - Order #{order.id} for {order.users.username}",
                 message=message,
@@ -198,7 +197,7 @@ class CheckoutView(APIView):
                 recipient_list=[order.users.email],
                 fail_silently=False
             )
-            return Response({"Price": totalPrice, 'message': 'Payment successful!'}, status=status.HTTP_200_OK)
+            return Response({"Price": total_price, 'message': 'Payment successful!'}, status=status.HTTP_200_OK)
         else:
             # Payment failed
             return Response({'message': 'Payment failed.'}, status=status.HTTP_400_BAD_REQUEST)
