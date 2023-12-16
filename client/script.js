@@ -24,9 +24,22 @@ for (var i = 0; i < smallimg.length; i++) {
 }
 
 let token = localStorage.getItem('authToken');
-if (token === null || token === undefined) {}
+let navLinks = document.querySelectorAll('#navbar li');
+if (token === null || token === undefined) {
+    let path = window.location.pathname;
+    let fileName = path.substring(path.lastIndexOf('/') + 1);
+    if (fileName === 'cart.html') {
+        window.location.href = 'signin.html'
+    }
+    for (let navLink of navLinks) {
+        let element = navLink.querySelector('a')
+        if (element.getAttribute("href") === "cart.html") {
+            element.setAttribute("href", "signin.html")
+            break;
+        }
+    }
+}
 else {
-    let navLinks = document.querySelectorAll('#navbar li');
     console.log(navLinks)
     for (let navLink of navLinks) {
         let element = navLink.querySelector('a')
