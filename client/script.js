@@ -40,7 +40,6 @@ if (token === null || token === undefined) {
     }
 }
 else {
-    console.log(navLinks)
     for (let navLink of navLinks) {
         let element = navLink.querySelector('a')
         if (element.getAttribute("href") === "signin.html") {

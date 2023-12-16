@@ -7,7 +7,6 @@ $(document).ready(function () {
             'Authorization': `Token ${authToken}`
         },
         success: (res) => {
-            console.log(res)
             $.each(res, (prop, value) => {
                 let imageSrc = '../server' + value['image-urls'][0];
                 let itemName = value['name'];
@@ -36,10 +35,8 @@ $(document).ready(function () {
             const checkOut = () => {
                 let cartSubTotal = 0;
                 $('.sub-total-price').each(function (index, element) {
-                    console.log($(element).text())
                     cartSubTotal += parseInt($(element).text().slice(1))
                 })
-                console.log(cartSubTotal)
                 $('#cart-subtotal-price').find("td:nth-child(2)").text(`$${cartSubTotal}`)
                 let totalPrice = cartSubTotal + parseInt($('#cart-shipping').find("td:nth-child(2)").text().slice(1))
                 $('#cart-total-price').find("td:nth-child(2)").text(`$${totalPrice}`)
