@@ -23,6 +23,21 @@ for (var i = 0; i < smallimg.length; i++) {
   };
 }
 
+let token = localStorage.getItem('authToken');
+if (token === null || token === undefined) {}
+else {
+    let navLinks = document.querySelectorAll('#navbar li');
+    console.log(navLinks)
+    for (let navLink of navLinks) {
+        let element = navLink.querySelector('a')
+        if (element.getAttribute("href") === "signin.html") {
+            navLink.parentNode.removeChild(navLink);
+            break;
+        }
+    }
+}
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
   var checkoutButton = document.getElementById('checkout-button');
