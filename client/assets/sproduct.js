@@ -38,7 +38,7 @@ else {
         // console.log($('.single-pro-details input').val())
         const authToken = localStorage.getItem('authToken')
         if (authToken === null || authToken === undefined) {
-            window.location.href = '/signin.html'
+            window.location.href = 'signin.html'
         }
         else {
             $.ajax({
