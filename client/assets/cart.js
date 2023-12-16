@@ -47,6 +47,25 @@ $(document).ready(function () {
             }
             checkOut();
 
+            $('.cart-item-remove').click(function () {
+                let parentRow = $(this).closest('tr')
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://localhost:8000/cart/',
+                    headers: {
+                        'Authorization': `Token ${authToken}`
+                    },
+                    data : {
+                        'item_id': parentRow.attr('id')
+                    },
+                    success: (res) => {
+                        console.log(res)
+                        checkOut();
+                    }
+                })
+                parentRow.remove()
+            })
+
             $('.shop-save-button').click(() => {
                 $('table.cart-table tbody tr').each(function (index, element) {
                     let item_id = $(element).attr('id');

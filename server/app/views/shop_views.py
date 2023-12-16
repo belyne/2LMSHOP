@@ -157,9 +157,11 @@ class CartView(APIView):
 
     def delete(self, request):
         order = Order.objects.get(users=request.user, ordered=False)
-        item_id = request.data.get('item_id')
-        order_item = get_object_or_404(OrderItem, order=order, item__id=item_id)
+        order_item_id = request.data.get('item_id')
+        # order_item = get_object_or_404(OrderItem, order=order, item__id=item_id)
+        order_item = OrderItem.objects.get(id=order_item_id)
         order_item.delete()
+        return Response({'success': f"OrderItem '{order_item.item.name}' was successfully deleted"})
 
 
 class CheckoutView(APIView):
