@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.exceptions import NotFound
+from django.http import Http404
 from django.core.mail import send_mail
 from django.core.files.storage import default_storage
 from django.views.generic.edit import CreateView
@@ -18,14 +18,19 @@ from app.models import Items, Images
 # Create your views here.
 class ProductDetailView(APIView):
     def get(self, request, pk):
-        item = get_object_or_404(Items, id=pk)
-        item_images = Images.objects.filter(item=item)
-        return Response({
-            'name': item.name,
-            'price': item.price,
-            'category': item.category,
-            'image_urls': [default_storage.url(image.image) for image in item_images]
-        })
+        try:
+            item = get_object_or_404(Items, id=pk)
+            print(item)
+            item_images = Images.objects.filter(item=item)
+            return Response({
+                'name': item.name,
+                'price': item.price,
+                'category': item.category,
+                'quantity_in_stock': item.quantity_in_stock,
+                'image_urls': [default_storage.url(image.image) for image in item_images]
+            })
+        except Http404:
+            return Response({'error': 'Product Not Found'})
 
 
 class ProductListView(APIView):
@@ -116,7 +121,7 @@ class AddToCartView(APIView):
 
         order, created = Order.objects.get_or_create(users=request.user, ordered=False)
         OrderItem.objects.create(order=order, item=item, quantity=quantity)
-        return Response({'Success': 'Product {} was added to cart.'.format(item.name)})
+        return Response({'Success': 'Product {} was added to cart.'.format(item.name), 'statusCode': status.HTTP_200_OK})
 
 
 class CartView(APIView):
