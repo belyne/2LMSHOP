@@ -12,7 +12,7 @@ from app.models import *
 from django.conf import settings
 
 from app.forms import ItemForm
-from app.models import Items, Images
+from app.models import Items, Images, Order, OrderItem
 
 
 # Create your views here.
@@ -128,6 +128,21 @@ class CartView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
+    def get(self, request):
+        order = Order.objects.get(users=request.user, ordered=False)
+        cart_products = OrderItem.objects.filter(order=order)
+        list_of_cart_products = dict()
+        for order_item in cart_products:
+            item_images = Images.objects.filter(item=order_item.item)
+            image_urls = [default_storage.url(image.image) for image in item_images]
+            list_of_cart_products[order_item.id] = {
+                "name": order_item.item.name,
+                "price": order_item.item.price,
+                "quantity": order_item.quantity,
+                "category": order_item.item.category,
+                "image-urls": image_urls
+            }
+        return Response(list_of_cart_products)
     def put(self, request):
         order = Order.objects.get(users=request.user, ordered=False)
         item_id = request.data.get('item_id')
