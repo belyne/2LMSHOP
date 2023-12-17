@@ -12,6 +12,7 @@ $(document).ready(function () {
                 let itemName = value['name'];
                 let itemPrice = value['price'];
                 let itemQuantity = value['quantity'];
+                let itemQuantityInStock = value['quantity-in-stock']
                 let subTotalPrice = itemPrice * itemQuantity;
                 $('table.cart-table tbody').append(`
                 <tr id='${prop}'>
@@ -19,7 +20,7 @@ $(document).ready(function () {
                     <td><img src="${imageSrc}" alt=""></td>
                     <td>${itemName}</td>
                     <td class="item-price">$${itemPrice}</td>
-                    <td><input class="quantity-input" type="number" value="${itemQuantity}" min=1></td>
+                    <td><input class="quantity-input" type="number" value="${itemQuantity}" min=1 max="${itemQuantityInStock - 5}"></td>
                     <td class="sub-total-price">$${subTotalPrice}</td>
                 </tr>
                 `)

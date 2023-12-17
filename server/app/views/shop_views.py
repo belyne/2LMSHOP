@@ -140,6 +140,7 @@ class CartView(APIView):
                 "price": order_item.item.price,
                 "quantity": order_item.quantity,
                 "category": order_item.item.category,
+                "quantity-in-stock": order_item.item.quantity_in_stock,
                 "image-urls": image_urls
             }
         return Response(list_of_cart_products)
