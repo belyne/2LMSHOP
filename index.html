@@ -6,67 +6,338 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2LMSHOP</title>
+    <script src="./assets/jquery-3.7.1.min.js"></script>
+    <script src="script.js" defer></script>
+<!--    <script src="./assets/home.js" defer></script>-->
     <script src="https://kit.fontawesome.com/274c052308.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <section id="header">
-    <a href="#"><img src="img/logo.png" class="logo"></a>
+    <a href="./index.html"><img src="img/logo.png" class="logo"></a>
 
     <div>
       <ul id="navbar">
-        <li><a class="active" href="home.html">Home</a></li>
+        <li><a class="active" href="index.html">Home</a></li>
         <li><a href="shop.html">Shop</a></li>
         <li><a href="blog.html">Blog</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
-
+        <li><a href="signin.html">SignIn</a></li>
+        <li><a href="signout.html" onclick="localStorage.removeItem('authToken')">SignOut</a></li>
+        <li id="ig-bag"><a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        <a href="#" id="close"><i class="fa-regular fa-circle-xmark"></i></a>
       </ul>
+    </div>
+
+    <div id="mobile">
+      <a href="cart.html"><i class="fa-solid fa-cart-shopping"></i></a>
+      <i  id="bar" class="fa-solid fa-bars"></i>
     </div>
   </section>
 
   <section id="hero">
-    <h1>Tade in Offer</h1>
+    <h1>Trade in Offer</h1>
     <h2>Super value deals</h2>
     <h4>On all products</h4>
     <p>Save more with coupons & up to 70% off!</p>
-    <button>Shop Now</button>
+    <a href="./shop.html"><button>Shop Now</button></a>
 
   </section>
 
-  <section id="feature" class="section-p1">
-    <div class="fe-box">
-      <img src="img/features/f1.png" alt="">
-      <h6>Free Shipping</h6>
+  <section id="product1" class="section-p1">
+    <h2>Featured Products</h2>
+    <p>Summer Collection New Mordern Design</p>
+    <div class="pro-container">
+      <div class="pro">
+        <img src="img/products/f1.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Shirt</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$20</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+        
+        <div class="pro">
+        <img src="img/products/f3.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Short</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$20</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+        
+        <div class="pro">
+        <img src="img/products/f5.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Skirt</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$20</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+        
+        <div class="pro">
+        <img src="img/products/f6.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Top</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$20</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="banner" class="section-m1">
+    <h2>Repair Services</h2>
+    <h4>Up to <span>70% off</span> - All shirts & Accessories</h4>
+    <button class="normal">Explore More</button>
+
+  </section>
+
+  <section id="product1" class="section-p1">
+    <h2>New Arrivals</h2>
+    <p>Summer Collection New Mordern Design</p>
+    <div class="pro-container">
+      <div class="pro">
+        <img src="img/products/n1.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Office trouser for men</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$35</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+
+      <div class="pro">
+        <img src="img/products/n2.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Office trouser for ladies</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$25</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+
+      <div class="pro">
+        <img src="img/products/n3.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Office wear for ladies</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$30</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+
+      <div class="pro">
+        <img src="img/products/n4.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>cusual t-shirt for men</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$20</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+
+      <div class="pro">
+        <img src="img/products/n5.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Office shirt for men</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$30</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+
+      <div class="pro">
+        <img src="img/products/n6.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>cusual top for ladies</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$18</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+
+      <div class="pro">
+        <img src="img/products/n7.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Office shirt for ladies</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$20</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
+
+      <div class="pro">
+        <img src="img/products/n8.jpg" alt="">
+        <div class="des">
+          <span>H&M</span>
+          <h4>Office wear for men</h4>
+          <div class="star">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <h5>$50</h5>
+        </div>
+        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+      </div>
 
     </div>
+  </section>
 
-    <div class="fe-box">
-      <img src="img/features/f2.png" alt="">
-      <h6>Online Order</h6>
-
+  <section id="sm-banner" class="section-p1">
+    <div class="banner-box">
+      <h2>Crazy deal</h2>
+      <h4>Buy 1 Get 1 free</h4>
+      <span>The best classic dress is on sale</span>
+      <button class="white">Learn More</button>
     </div>
 
-    <div class="fe-box">
-      <img src="img/features/f3.png" alt="">
-      <h6>Save Money</h6>
-
-    </div>
-
-    <div class="fe-box">
-      <img src="img/features/f4.png" alt="">
-      <h6>Promotions</h6>
-
-    </div>
-
-    <div class="fe-box">
-      <img src="img/features/f5.png" alt="">
-      <h6>24/7 support</h6>
-
+    <div class="banner-box banner-box2">
+      <h2>Spring/Summer</h2>
+      <h4>Upcoming seasion</h4>
+      <span>The best classic dress is on sale</span>
+      <button class="white">collection</button>
     </div>
 
   </section>
+
+  <section id="banner3">
+    <div class="banner-box">
+      <h2>SEASONAL SALE</h2>
+      <h3>Winter collection -50% OFF</h3>
+    </div>
+
+    <div class="banner-box banner-box2">
+      <h2>SEASONAL SALE</h2>
+      <h3>Winter collection -50% OFF</h3>
+    </div>
+
+    <div class="banner-box banner-box3">
+      <h2>SEASONAL SALE</h2>
+      <h3>Winter collection -50% OFF</h3>
+    </div>
+
+  </section>
+
+  <section id="newsletter" class="section-p1 section-m1">
+    <div class="newstext">
+      <h4>Sign Up for Newsletters</h4>
+      <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
+      </div>
+
+      <div class="form">
+        <input type="text" placeholder="Your email address">
+        <button class="normal">Sign Up</button>
+    </div>
+
+  </section>
+
+  <footer class="section-p1">
+    <div class="follow">
+        <h4>Follow us</h4>
+        <div class="icon">
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-pinterest-p"></i>
+          <i class="fa-brands fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h4>My Account</h4>
+      <a href="./signin.html">Sign In</a>
+      <a href="./cart.html">View cart</a>
+      <a href="#">My wishlist</a>
+      <a href="#">Track My order</a>
+      <a href="#">Help</a>
+    </div>
+
+  </footer>
 
 </body>
 </html>
