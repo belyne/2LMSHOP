@@ -120,8 +120,18 @@ class AddToCartView(APIView):
             return Response({'Sorry': "There aren't enough of this product in stock."})
 
         order, created = Order.objects.get_or_create(users=request.user, ordered=False)
-        OrderItem.objects.create(order=order, item=item, quantity=quantity)
-        return Response({'Success': 'Product {} was added to cart.'.format(item.name), 'statusCode': status.HTTP_200_OK})
+
+        # Making sure the object doesn't exist before adding to Cart
+        try:
+            order_item = OrderItem.objects.get(order=order, item=item)
+            order_item.quantity = quantity
+            order_item.save()
+        except OrderItem.DoesNotExist:
+            order_item = OrderItem.objects.create(order=order, item=item, quantity=quantity)
+        return Response({
+            'Success': 'Product {} was added to cart.'.format(order_item.item.name),
+            'statusCode': status.HTTP_200_OK
+        })
 
 
 class CartView(APIView):
@@ -170,6 +180,9 @@ class CheckoutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        full_name = request.data.get('fullname')
+        email = request.data.get('email')
+        address = request.data.get('address')
         try:
             order = Order.objects.get(users=request.user, ordered=False)
         except Order.DoesNotExist:
@@ -178,7 +191,7 @@ class CheckoutView(APIView):
         # Updating the quantities of the items in Stock.
         for item in order.items.all():
             i = OrderItem.objects.get(order=order, item=item)
-            item.quantityInStock -= i.quantity
+            item.quantity_in_stock -= i.quantity
             item.save()
         total_price = sum([order_item.getTotalPrice() for order_item in OrderItem.objects.filter(order=order)])
         # Charging the user for the order
@@ -189,21 +202,21 @@ class CheckoutView(APIView):
             # Payment successful
 
             # Sending an email with the purchase information
-            message = f"Thank you for your purchase! Your order will be shipped to:\n{order.users.email}\n\nItems:\n"
+            message = f"Thank you for your purchase! Your order will be shipped to:\n{address}\n\nItems:\n"
             for order_item in OrderItem.objects.filter(order=order):
                 message += f"{order_item.quantity} x {order_item.item.name} - {order_item.getTotalPrice()}frs\n"
             message += f"Total Price: {total_price}frs"
             send_mail(
-                subject=f"Purchase Confirmation - Order #{order.id} for {order.users.username}",
+                subject=f"Purchase Confirmation - Order #{order.id} for {full_name}",
                 message=message,
                 from_email=settings.EMAIL_HOST_USER,
-                recipient_list=[order.users.email],
+                recipient_list=[order.users.email, email],
                 fail_silently=False
             )
-            return Response({"Price": total_price, 'message': 'Payment successful!'}, status=status.HTTP_200_OK)
+            return Response({"Price": total_price, 'message': 'Payment successful!', 'body': message, 'statusCode': 200})
         else:
             # Payment failed
-            return Response({'message': 'Payment failed.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'message': 'Payment failed.', 'statusCode': 400})
 
 
 class ItemView(CreateView):
