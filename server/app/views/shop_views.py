@@ -207,7 +207,7 @@ class CheckoutView(APIView):
                 message += f"{order_item.quantity} x {order_item.item.name} - {order_item.getTotalPrice()}frs\n"
             message += f"Total Price: {total_price}frs"
             send_mail(
-                subject=f"Purchase Confirmation - Order #{order.id} for {full_name}",
+                subject=f"Purchase Confirmation - Order for {full_name}",
                 message=message,
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[order.users.email, email],
