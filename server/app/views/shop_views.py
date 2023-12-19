@@ -7,7 +7,9 @@ from rest_framework.authentication import TokenAuthentication
 from django.http import Http404
 from django.core.mail import send_mail
 from django.core.files.storage import default_storage
+from django.template.loader import render_to_string
 from django.views.generic.edit import CreateView
+from django.utils.html import strip_tags
 from app.models import *
 from django.conf import settings
 
@@ -193,27 +195,46 @@ class CheckoutView(APIView):
             i = OrderItem.objects.get(order=order, item=item)
             item.quantity_in_stock -= i.quantity
             item.save()
-        total_price = sum([order_item.getTotalPrice() for order_item in OrderItem.objects.filter(order=order)])
+        sub_total_price = sum([order_item.getTotalPrice() for order_item in OrderItem.objects.filter(order=order)])
         # Charging the user for the order
         # (The payment processing code)
-        if total_price > 0:
+        if sub_total_price > 0:
             order.ordered = True
             order.save()
             # Payment successful
 
             # Sending an email with the purchase information
-            message = f"Thank you for your purchase! Your order will be shipped to:\n{address}\n\nItems:\n"
-            for order_item in OrderItem.objects.filter(order=order):
-                message += f"{order_item.quantity} x {order_item.item.name} - {order_item.getTotalPrice()}frs\n"
-            message += f"Total Price: {total_price}frs"
+            # message = f"Thank you for your purchase! Your order will be shipped to:\n{address}\n\nItems:\n"
+            # for order_item in OrderItem.objects.filter(order=order):
+            #     message += f"{order_item.quantity} x {order_item.item.name} - {order_item.getTotalPrice()}$\n"
+            # message += f"Total Price: {sub_total_price}$"
+            shipping_fee = 40
+            total_price = sub_total_price + shipping_fee
+            order_id = order.id
+            date_ordered = order.date_ordered
+            order_items = OrderItem.objects.filter(order=order)
+            context = {
+                'order_id': order_id,
+                'date_ordered': date_ordered.date(),
+                'address': address,
+                'sub_total_price': f'${sub_total_price}',
+                'customer': request.user.email,
+                'total_price': f'${total_price}',
+                'order_items': [{'name': order_item.item.name,
+                                 'quantity': order_item.quantity,
+                                 'price': f'${order_item.item.price}'} for order_item in order_items]
+            }
+            html_message = render_to_string('app/email.html', context=context)
+            plain_message = strip_tags(html_message)
             send_mail(
                 subject=f"Purchase Confirmation - Order for {full_name}",
-                message=message,
+                message=plain_message,
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=[order.users.email, email],
+                html_message=html_message,
                 fail_silently=False
             )
-            return Response({"Price": total_price, 'message': 'Payment successful!', 'body': message, 'statusCode': 200})
+            return Response({"Price": sub_total_price, 'message': 'Payment successful!', 'body': plain_message, 'statusCode': 200})
         else:
             # Payment failed
             return Response({'message': 'Payment failed.', 'statusCode': 400})
