@@ -100,7 +100,7 @@ DATABASES = {
     }
 }
 
-# Email
+# SMTP Configuration
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
