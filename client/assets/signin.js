@@ -14,7 +14,7 @@ $(document).ready(function () {
             success: (res) => {
                 if (res.hasOwnProperty('token')) {
                     localStorage.setItem('authToken', res.token)
-                    window.location.href = './home.html'
+                    window.location.href = './index.html'
                 }
                 else if (res.hasOwnProperty('error'))   console.log(res.error)
             }
